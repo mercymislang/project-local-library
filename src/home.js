@@ -1,11 +1,11 @@
 const { sortAccountsByLastName } = require("./accounts");
 
-function getTotalBooksCount(books) {
-  return books.length; // with length method, it'll go thru books array to take count
+const getTotalBooksCount = (books) => {  // added use arrow function to count total 
+  return books.length; // go thru length of array of books
 }
 
-function getTotalAccountsCount(accounts) {
-  return accounts.length; //with length method, it'll go thru accounts array to take count
+var getTotalAccountsCount = (accounts) => {   // added use arrow function to count total 
+  return accounts.length; // go thru length of array of accounts
 }
 
 function getBooksBorrowedCount(books) {
