@@ -9,13 +9,17 @@ function findBookById(books, id) {
 }
 
 function partitionBooksByBorrowedStatus(books) {
-  return books.reduce(
-    (bookA, bookB) => {
-      bookA[+(bookB.borrows[0] && bookB.borrows[0].returned)].push(bookB); // checks to see status of book - borrowed AND returned
-      return bookA; //returns arrays
-    },
-    [[], []]
-  );
+     let returnedBooks = books.filter((book) =>  // filter thru books array to get new array that meets condition 
+  book.borrows.every((borrow) => borrow.returned === true)  // condition checking if book turned in
+);
+ const borrowedBooks= books.filter((book) =>
+  book.borrows.some((borrow) => borrow.returned === false)
+ );
+ let booksBorrowed = books.filter((book) => //added use of helper function some() to filter method
+  book.borrows.some((borrow) => borrow.returned === false) //checks if condition is true within borrow array
+ );
+ var newBookArray = [[...booksBorrowed], [...returnedBooks]];
+ return newBookArray;
 }
 
 function getBorrowersForBook(book, accounts) {
