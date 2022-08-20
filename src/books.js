@@ -23,14 +23,12 @@ function partitionBooksByBorrowedStatus(books) {
 }
 
 function getBorrowersForBook(book, accounts) {
-  const { borrows } = book; // set array of borrows to equal book
-  let borrowers = borrows.map(({ id, returned }) => {
-    // map to return array new array consisting of id, returned
-    const account = accounts.find((account) => account.id === id); //find account id that matches given id
-    return { ...account, returned };
-  });
-  borrowers.sort((borrowerA, borrowerB) => borrowerA - borrowerB); //sort new array
-  return borrowers.slice(0, 10); // slice used to set to return first 10 borrowers
+   let borrowed= book.borrows.map((borrow) => { // declared borrowed use map() for books.borrow
+    let accountInfo = findAuthorById(accounts, borrow.id); //added findAuthorById as helper function to declare accountInfo variable
+      accountInfo.returned = borrow.returned; 
+  return accountInfo; // returns accountINFO if borrowed books returned
+  }).slice(0, 10); // / slice used to list 10 borrowers
+return borrowed; // return list of borrowed books
 }
 
 module.exports = {
